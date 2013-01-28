@@ -1,0 +1,14 @@
+<h1>Store</h1>
+
+<% if @products.empty? %>
+  <p><strong>No Products</strong></p>
+<% end %>
+
+<% @products.each do |product| %>
+<div class="product">
+  <h2><%= product.name %></h2>
+  Price: <%= number_to_currency(product.price) %>
+</div>
+<% end %>
+
+<%= link_to 'New Product', new_product_path %>

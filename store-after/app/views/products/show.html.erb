@@ -1,0 +1,23 @@
+<h1>Product Details</h1>
+
+<p>
+  <b>Name:</b>
+  <%= @product.name %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= number_to_currency @product.price %>
+</p>
+
+<% @product.properties.each do |name, value| %>
+  <p>
+    <b><%= name.humanize %>:</b>
+    <%= value %>
+  </p>
+<% end %>
+
+<p>
+  <%= link_to 'Edit', edit_product_path(@product) %> |
+  <%= link_to 'Back to Products', products_path %>
+</p>

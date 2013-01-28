@@ -1,0 +1,17 @@
+<h1>Store</h1>
+
+<% if @products.empty? %>
+  <p><strong>No Products</strong></p>
+<% end %>
+
+<% @products.each do |product| %>
+<div class="product">
+  <h2><%= product.name %></h2>
+  Price: <%= number_to_currency(product.price) %>
+</div>
+<% end %>
+
+<%= form_tag new_product_path, method: :get do %>
+  <%= select_tag :product_type_id, options_from_collection_for_select(ProductType.all, :id, :name) %>
+  <%= submit_tag "New Product", name: nil %>
+<% end %>
