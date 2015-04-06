@@ -40,7 +40,7 @@ class ProductTypesController < ApplicationController
   # POST /product_types
   # POST /product_types.json
   def create
-    @product_type = ProductType.new(params[:product_type])
+    @product_type = ProductType.new(product_type_params)
 
     respond_to do |format|
       if @product_type.save
@@ -59,7 +59,7 @@ class ProductTypesController < ApplicationController
     @product_type = ProductType.find(params[:id])
 
     respond_to do |format|
-      if @product_type.update_attributes(params[:product_type])
+      if @product_type.update_attributes(product_type_params)
         format.html { redirect_to @product_type, notice: 'Product type was successfully updated.' }
         format.json { head :no_content }
       else
@@ -79,5 +79,10 @@ class ProductTypesController < ApplicationController
       format.html { redirect_to product_types_url }
       format.json { head :no_content }
     end
+  end
+
+  def product_type_params
+	params.require(:product_type).permit(
+			:name, fields_attributes: [ :field_type, :name, :required ] )
   end
 end
